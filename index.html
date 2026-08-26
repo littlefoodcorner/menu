@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Corner — Bánh Trung Thu 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#233524;
+    --green-deep:#152218;
+    --green-soft:#EDF1E7;
+    --gold:#D9A94D;
+    --gold-deep:#B4812C;
+    --pink:#E7A9B4;
+    --pink-deep:#C96B7E;
+    --cream:#FBF6EA;
+    --ink:#2B2A28;
+    --ink-soft:#7A756C;
+    --white:#FFFFFF;
+    --card-shadow: 0 10px 28px rgba(20,30,20,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Quicksand', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    padding-bottom:60px;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo 2', sans-serif;
+    color:var(--green);
+    margin:0;
+  }
+  [contenteditable="true"]{ cursor:text; border-radius:4px; }
+  [contenteditable="true"]:hover{ background:rgba(217,169,77,0.14); }
+  [contenteditable="true"]:focus{ background:rgba(217,169,77,0.22); outline:2px solid var(--gold); }
+
+  /* ---------- NAV ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:60;
+    background:rgba(251,246,234,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(35,53,36,0.12);
+  }
+  .topbar-inner{
+    max-width:1180px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:10px 20px; flex-wrap:wrap;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-name{ font-family:'Baloo 2',sans-serif; font-weight:800; font-size:17px; color:var(--green); }
+  .brand-tag{ font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-deep); font-weight:700; }
+  .back-link{
+    font-family:'Quicksand',sans-serif; font-weight:700; font-size:13px;
+    color:var(--green); text-decoration:none; display:flex; align-items:center; gap:5px;
+    padding:8px 14px; border-radius:20px; background:var(--green-soft); transition:background .15s ease;
+  }
+  .back-link:hover{ background:#e2e9d9; }
+  .nav-actions{ display:flex; align-items:center; gap:8px; }
+  .admin-toggle{
+    border:none; cursor:pointer; flex-shrink:0; width:32px; height:32px; border-radius:50%;
+    background:#EDF2E7; font-size:14px; display:flex; align-items:center; justify-content:center;
+    opacity:0.55; transition:all .15s ease;
+  }
+  .admin-toggle:hover{ opacity:1; }
+  .admin-toggle.active{ background:var(--green); opacity:1; }
+  .admin-toggle.logged-in{ background:var(--green-soft); }
+  .edit-btn{
+    display:none; border:none; cursor:pointer; flex-shrink:0;
+    background:var(--green); color:white; font-family:'Quicksand',sans-serif;
+    font-weight:700; font-size:12.5px; padding:8px 14px; border-radius:20px;
+    align-items:center; gap:5px;
+  }
+  body.edit-mode .edit-btn{ display:flex; }
+  .edit-btn.export{ background:var(--pink-deep); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    min-height:460px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; color:white;
+    background-color:var(--green-deep);
+    background-size:cover; background-position:center 30%; background-repeat:no-repeat;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(21,34,24,0.55), rgba(21,34,24,0.82));
+  }
+  .hero-inner{ max-width:720px; padding:60px 24px; position:relative; z-index:2; }
+  .hero-kicker{
+    display:inline-block; font-size:13px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:14px;
+  }
+  .hero-title{ font-size:50px; line-height:1.15; font-weight:800; color:white; }
+  .hero-desc{ font-size:16px; color:#EDE7D6; margin-top:16px; line-height:1.6; max-width:520px; margin-left:auto; margin-right:auto; }
+  .hero-cta{
+    margin-top:26px; display:inline-flex; align-items:center; gap:8px;
+    background:var(--gold); color:var(--green-deep); font-family:'Baloo 2',sans-serif; font-weight:700; font-size:15px;
+    padding:13px 26px; border-radius:30px; text-decoration:none; box-shadow:0 10px 24px rgba(217,169,77,0.35);
+    border:none; cursor:pointer; transition:transform .15s ease;
+  }
+  .hero-cta:hover{ transform:translateY(-2px); }
+  .hero-note{ margin-top:14px; font-size:12.5px; color:#CFC9B6; }
+  .hero-img-edit{
+    display:none; position:absolute; right:18px; bottom:18px; z-index:5;
+    gap:8px;
+  }
+  body.edit-mode .hero-img-edit{ display:flex; }
+
+  /* ---------- IMAGE EDIT CONTROLS (shared) ---------- */
+  .img-edit-btn{
+    border:none; cursor:pointer; font-family:'Quicksand',sans-serif; font-weight:700; font-size:12px;
+    padding:8px 13px; border-radius:16px; display:inline-flex; align-items:center; gap:5px;
+    background:rgba(255,255,255,0.95); color:var(--green); box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  }
+  .img-edit-btn:hover{ background:white; }
+  .img-edit-btn.danger{ color:var(--pink-deep); }
+  .img-edit-btn input[type="file"]{ display:none; }
+
+  .img-edit-wrap{ position:relative; }
+  .img-edit-overlay{
+    display:none; position:absolute; inset:0; z-index:4;
+    align-items:center; justify-content:center; gap:8px;
+    background:rgba(21,34,24,0.5); border-radius:inherit;
+  }
+  body.edit-mode .img-edit-overlay{ display:flex; }
+
+  .img-placeholder{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    width:100%; height:100%; min-height:120px; color:var(--ink-soft);
+    background:repeating-linear-gradient(45deg, #F1ECDD, #F1ECDD 10px, #E9E3D0 10px, #E9E3D0 20px);
+    font-size:12px; text-align:center; padding:10px;
+  }
+  .img-placeholder .icon{ font-size:24px; }
+
+  /* ---------- INFO STRIP ---------- */
+  .info-strip{
+    max-width:1180px; margin:-34px auto 0; padding:0 20px; position:relative; z-index:5;
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
+  }
+  .info-card{
+    background:white; border-radius:16px; box-shadow:var(--card-shadow);
+    padding:18px 20px; display:flex; gap:12px; align-items:flex-start;
+  }
+  .info-icon{ font-size:22px; line-height:1; }
+  .info-title{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:14.5px; color:var(--green); margin-bottom:3px; }
+  .info-desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.45; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{ max-width:1180px; margin:0 auto; padding:70px 20px 10px; }
+  .section-head{ text-align:center; margin-bottom:40px; }
+  .section-kicker{
+    display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:2.5px;
+    text-transform:uppercase; color:var(--pink-deep); margin-bottom:10px;
+  }
+  .section-title{ font-size:32px; font-weight:800; }
+  .section-sub{ font-size:14.5px; color:var(--ink-soft); margin-top:10px; max-width:520px; margin-left:auto; margin-right:auto; }
+
+  /* ---------- PRODUCT GRID ---------- */
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:24px;
+  }
+  .card{
+    background:white; border-radius:20px; overflow:hidden; box-shadow:var(--card-shadow);
+    display:flex; flex-direction:column; border:1px solid rgba(35,53,36,0.06);
+    position:relative;
+  }
+  .card-badge{
+    position:absolute; top:12px; left:12px; z-index:3;
+    background:var(--pink-deep); color:white; font-size:10.5px; font-weight:700;
+    padding:4px 11px; border-radius:12px; letter-spacing:0.3px;
+    min-width:20px; min-height:12px;
+  }
+  .card-del{
+    position:absolute; top:10px; right:10px; z-index:5; display:none;
+    width:24px; height:24px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(255,255,255,0.92); color:var(--ink-soft); font-size:12px; font-weight:700;
+    align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.12);
+  }
+  body.edit-mode .card-del{ display:flex; }
+  .card-del:hover{ background:var(--pink-deep); color:white; }
+  .card-img{ height:190px; background-size:cover; background-position:center; position:relative; }
+  .card-body{ padding:16px 18px 18px; display:flex; flex-direction:column; flex:1; }
+  .card-name{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px; color:var(--green); margin-bottom:4px; }
+  .card-desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.55; margin-bottom:12px; }
+  .card-meta{ font-size:11.5px; color:var(--ink-soft); margin-bottom:6px; line-height:1.6; }
+  .card-meta b{ color:var(--ink); }
+  .card-meta-block{ margin-bottom:12px; }
+  .price-row{
+    margin-top:auto; display:flex; align-items:center; justify-content:space-between;
+    background:var(--green-soft); border-radius:12px; padding:10px 12px;
+  }
+  .price{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:16px; color:var(--pink-deep); outline:none; }
+  .qty-stepper{ display:flex; align-items:center; gap:8px; }
+  .qty-btn{
+    width:24px; height:24px; border-radius:50%; border:1.5px solid var(--pink-deep); background:white;
+    color:var(--pink-deep); font-weight:700; font-size:14px; cursor:pointer; line-height:1;
+    display:flex; align-items:center; justify-content:center; transition:all .12s ease;
+  }
+  .qty-btn:hover{ background:var(--pink-deep); color:white; }
+  .qty-val{ min-width:16px; text-align:center; font-weight:700; font-size:13.5px; }
+  .add-btn{
+    border:none; cursor:pointer; background:var(--green); color:white; font-family:'Quicksand',sans-serif;
+    font-weight:700; font-size:12.5px; padding:8px 14px; border-radius:20px; transition:background .15s ease;
+  }
+  .add-btn:hover{ background:var(--green-deep); }
+  .add-btn:disabled{ background:#B7C2AF; cursor:default; }
+  .add-product-card{
+    display:none; align-items:center; justify-content:center; flex-direction:column; gap:8px;
+    border:2px dashed #C9D2BE; border-radius:20px; min-height:220px; cursor:pointer;
+    color:var(--green); background:rgba(255,255,255,0.5); transition:background .15s ease;
+  }
+  body.edit-mode .add-product-card{ display:flex; }
+  .add-product-card:hover{ background:white; }
+  .add-product-plus{ font-size:30px; font-weight:800; line-height:1; }
+
+  /* ---------- GALLERY / SHOWCASE ---------- */
+  .showcase{
+    max-width:1180px; margin:70px auto 0; padding:0 20px;
+    display:grid; grid-template-columns:1.1fr 1fr; gap:26px; align-items:center;
+  }
+  .showcase-img{ border-radius:22px; overflow:hidden; box-shadow:var(--card-shadow); min-height:260px; }
+  .showcase-img img{ display:block; width:100%; height:100%; object-fit:cover; }
+  .showcase-text h3{ font-size:24px; margin-bottom:12px; }
+  .showcase-text p{ font-size:14px; color:var(--ink-soft); line-height:1.7; }
+  .showcase-list{ margin-top:16px; padding:0; list-style:none; }
+  .showcase-list li{ font-size:13.5px; color:var(--ink); margin-bottom:8px; display:flex; gap:8px; align-items:flex-start; }
+  .showcase-list li::before{ content:'✿'; color:var(--pink-deep); flex-shrink:0; }
+
+  /* ---------- CART FAB ---------- */
+  .cart-fab{
+    position:fixed; right:20px; bottom:20px; z-index:100;
+    background:var(--green); color:white; border:none; border-radius:30px;
+    padding:15px 22px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:14.5px;
+    display:flex; align-items:center; gap:9px; cursor:pointer; box-shadow:0 10px 24px rgba(21,34,24,0.4);
+  }
+  .cart-fab .count{
+    background:var(--gold); color:var(--green-deep); border-radius:50%; min-width:22px; height:22px; padding:0 5px;
+    display:flex; align-items:center; justify-content:center; font-size:11.5px;
+  }
+
+  /* ---------- OVERLAY / PANEL ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,25,15,0.5); z-index:200;
+    display:none; align-items:center; justify-content:center; padding:16px;
+  }
+  .overlay.open{ display:flex; }
+  .panel{
+    background:white; width:100%; max-width:540px; border-radius:22px;
+    max-height:88vh; display:flex; flex-direction:column; padding:24px;
+    position:relative; overflow:hidden;
+  }
+  .panel-scroll{ overflow-y:auto; padding-right:4px; }
+  .panel h3{ font-size:21px; margin-bottom:4px; }
+  .panel-sub{ font-size:12.5px; color:var(--ink-soft); margin-bottom:6px; }
+  .panel-close{ position:absolute; top:16px; right:20px; border:none; background:none; font-size:22px; cursor:pointer; color:var(--ink-soft); }
+
+  .cart-items{ margin:16px 0; }
+  .cart-item{
+    display:flex; justify-content:space-between; align-items:center; padding:10px 0;
+    border-bottom:1px solid var(--green-soft); font-size:13.5px; gap:8px;
+  }
+  .cart-item-name{ flex:1; }
+  .cart-item-name b{ color:var(--green); }
+  .cart-item-remove{ border:none; background:none; color:var(--pink-deep); font-size:12px; cursor:pointer; font-weight:700; }
+  .cart-empty{ text-align:center; color:var(--ink-soft); padding:30px 0; font-size:13.5px; }
+  .cart-total-row{
+    display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:17px;
+    color:var(--green); padding-top:12px; border-top:2px solid var(--green-soft); margin-top:4px;
+  }
+  .cart-actions{ display:flex; gap:10px; margin-top:16px; }
+  .btn{
+    border:none; cursor:pointer; border-radius:16px; padding:12px 16px; font-family:'Quicksand',sans-serif;
+    font-weight:700; font-size:13.5px; flex:1; transition:transform .1s ease;
+  }
+  .btn:active{ transform:scale(0.98); }
+  .btn-primary{ background:var(--green); color:white; }
+  .btn-primary:hover{ background:var(--green-deep); }
+  .btn-secondary{ background:var(--green-soft); color:var(--green); }
+
+  /* ---------- ORDER FORM ---------- */
+  .form-group{ margin-bottom:14px; }
+  .form-label{ font-size:12.5px; font-weight:700; color:var(--green); margin-bottom:6px; display:block; }
+  .form-hint{ font-size:11px; color:var(--ink-soft); margin-top:5px; }
+  .form-input, .form-textarea{
+    width:100%; padding:11px 14px; border-radius:12px; border:1.5px solid #E6E1D2;
+    font-family:'Quicksand',sans-serif; font-size:13.5px; outline:none; background:var(--cream);
+  }
+  .form-input:focus, .form-textarea:focus{ border-color:var(--green); background:white; }
+  .form-textarea{ resize:vertical; min-height:64px; }
+  .form-error{ color:#C0392B; font-size:11.5px; margin-top:5px; min-height:14px; }
+
+  .confirm-box{
+    background:var(--green-soft); border-radius:16px; padding:16px 18px; font-size:13px; color:var(--ink);
+    line-height:1.7;
+  }
+  .confirm-box b{ color:var(--green); }
+
+  /* ---------- AUTH ---------- */
+  .auth-hint{ font-size:12.5px; color:var(--ink-soft); margin:4px 0 14px; line-height:1.5; }
+  .auth-error{ color:#C0392B; font-size:12.5px; margin-top:10px; min-height:16px; }
+
+  /* ---------- TOAST ---------- */
+  .toast{
+    position:fixed; left:50%; bottom:24px; transform:translate(-50%, 20px);
+    background:var(--green); color:white; padding:12px 20px; border-radius:12px;
+    font-size:13.5px; font-weight:600; box-shadow:0 8px 24px rgba(0,0,0,0.25); z-index:300;
+    opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;
+  }
+  .toast.show{ opacity:1; pointer-events:auto; transform:translate(-50%, 0); }
+
+  footer{
+    margin-top:70px; padding:34px 20px 40px; text-align:center;
+    background:var(--green); color:#D8DFCF;
+  }
+  footer .fname{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:18px; color:white; }
+  footer .ftag{ font-size:12px; color:#AEBBA0; margin-top:6px; }
+  footer .fcontact{ margin-top:16px; }
+  footer .fcontact-link{
+    color:white; font-weight:700; font-size:13.5px; text-decoration:none;
+    background:rgba(255,255,255,0.12); padding:8px 16px; border-radius:16px;
+  }
+
+  @media (max-width:760px){
+    .hero-title{ font-size:36px; }
+    .info-strip{ grid-template-columns:1fr; margin-top:-24px; }
+    .showcase{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div>
+        <div class="brand-name">Little Corner</div>
+        <div class="brand-tag">Mooncake Festival</div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <a class="back-link" href="thucdon.html">← Về trang thực đơn</a>
+      <button class="admin-toggle" id="adminToggle" title="Chế độ chỉnh sửa (Admin)" onclick="handleAdminClick()">⚙️</button>
+      <button class="edit-btn save" id="saveBtn" onclick="saveContent(true)">💾 Lưu</button>
+      <button class="edit-btn export" onclick="exportSite()">⬇ Xuất file</button>
+    </div>
+  </div>
+</div>
+
+<section class="hero" id="heroSection">
+  <div class="hero-inner">
+    <div class="hero-kicker" id="heroKicker" contenteditable="false">Tết Trung Thu 2025</div>
+    <h1 class="hero-title" id="heroTitle" contenteditable="false">Đặt bánh trước, trọn vẹn mùa trăng</h1>
+    <p class="hero-desc" id="heroDesc" contenteditable="false">Chọn vị bánh yêu thích, hẹn ngày nhận bánh — chúng mình sẽ liên hệ xác nhận đơn trong vòng 24 giờ.</p>
+    <button class="hero-cta" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">🌕 Chọn bánh ngay</button>
+    <div class="hero-note" id="heroNote" contenteditable="false">Đặt trước ít nhất 2 ngày để chúng mình chuẩn bị bánh tươi ngon nhất</div>
+  </div>
+  <div class="hero-img-edit">
+    <label class="img-edit-btn">📤 Đổi ảnh nền<input type="file" accept="image/*" onchange="handleHeroImageChange(event)"></label>
+    <button class="img-edit-btn danger" onclick="removeHeroImage()">🗑 Xoá ảnh nền</button>
+  </div>
+</section>
+
+<div class="info-strip">
+  <div class="info-card">
+    <div class="info-icon">📅</div>
+    <div>
+      <div class="info-title">Pre-order linh hoạt</div>
+      <div class="info-desc">Chọn ngày nhận bánh mong muốn, sớm nhất sau 2 ngày kể từ lúc đặt.</div>
+    </div>
+  </div>
+  <div class="info-card">
+    <div class="info-icon">🪷</div>
+    <div>
+      <div class="info-title">Hộp quà sang trọng</div>
+      <div class="info-desc">Thiết kế hộp hoa sen, dây quai tinh tế — sẵn sàng làm quà biếu.</div>
+    </div>
+  </div>
+  <div class="info-card">
+    <div class="info-icon">📞</div>
+    <div>
+      <div class="info-title">Xác nhận qua điện thoại</div>
+      <div class="info-desc">Đội ngũ Little Corner sẽ gọi lại xác nhận đơn ngay khi bạn gửi thông tin.</div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="menu">
+  <div class="section-head">
+    <div class="section-kicker">Thực đơn Trung Thu</div>
+    <h2 class="section-title">Bánh trung thu handmade</h2>
+    <p class="section-sub">Vỏ bánh nướng vàng óng, nhân đầy đặn — mỗi chiếc đều được làm thủ công theo từng đơn đặt.</p>
+  </div>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<div class="showcase">
+  <div class="showcase-img img-edit-wrap" id="showcase1ImgWrap"></div>
+  <div class="showcase-text">
+    <h3>Nhân bánh đa dạng, đầy ắp trứng muối</h3>
+    <p>Mỗi vị bánh là một câu chuyện riêng — từ vị truyền thống đậm đà đến những lựa chọn nhẹ nhàng, thanh mát cho cả gia đình.</p>
+    <ul class="showcase-list">
+      <li>Trứng muối nguyên viên, béo bùi</li>
+      <li>Vỏ bánh mỏng, nướng vàng đều</li>
+      <li>Không chất bảo quản, làm theo đơn</li>
+      <li>Đóng hộp quà tặng lịch sự, sang trọng</li>
+    </ul>
+  </div>
+</div>
+
+<section class="section" style="padding-top:60px;">
+  <div class="showcase" style="grid-template-columns:1fr 1.1fr;">
+    <div class="showcase-text">
+      <h3>Set quà tặng trọn bộ</h3>
+      <p>Hộp bánh phối cùng hộp giấy hoa sen, dây quai lụa xanh rêu — món quà Trung Thu ý nghĩa gửi đến người thân, đối tác.</p>
+      <ul class="showcase-list">
+        <li>Chọn từng vị bánh theo ý thích</li>
+        <li>Tặng kèm vỏ hộp Trung Thu sang trọng</li>
+        <li>Ưu đãi phí ship theo từng set quà</li>
+      </ul>
+    </div>
+    <div class="showcase-img img-edit-wrap" id="showcase2ImgWrap"></div>
+  </div>
+</section>
+
+<button class="cart-fab" onclick="toggleCart(true)">
+  🛍️ Giỏ hàng <span class="count" id="cartCount">0</span>
+</button>
+
+<!-- CART OVERLAY -->
+<div class="overlay" id="cartOverlay">
+  <div class="panel">
+    <button class="panel-close" onclick="toggleCart(false)">×</button>
+    <h3>Giỏ hàng của bạn</h3>
+    <div class="panel-sub">Kiểm tra lại bánh đã chọn trước khi đặt hàng nhé</div>
+    <div class="panel-scroll">
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-total-row">
+        <span>Tổng cộng</span>
+        <span id="cartTotal">0đ</span>
+      </div>
+    </div>
+    <div class="cart-actions">
+      <button class="btn btn-secondary" onclick="toggleCart(false)">Tiếp tục chọn bánh</button>
+      <button class="btn btn-primary" id="goCheckoutBtn" onclick="openCheckout()">Đặt hàng →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT OVERLAY -->
+<div class="overlay" id="checkoutOverlay">
+  <div class="panel">
+    <button class="panel-close" onclick="toggleCheckout(false)">×</button>
+    <h3>Thông tin nhận bánh</h3>
+    <div class="panel-sub">Vui lòng điền đầy đủ để chúng mình liên hệ xác nhận đơn</div>
+    <div class="panel-scroll">
+      <form id="orderForm">
+        <div class="form-group">
+          <label class="form-label">Họ và tên người nhận *</label>
+          <input class="form-input" id="custName" type="text" placeholder="Nguyễn Văn A" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Số điện thoại *</label>
+          <input class="form-input" id="custPhone" type="tel" placeholder="09xx xxx xxx" required>
+          <div class="form-error" id="phoneError"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Địa chỉ nhận bánh *</label>
+          <textarea class="form-textarea" id="custAddress" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ngày muốn nhận bánh *</label>
+          <input class="form-input" id="custDate" type="date" required>
+          <div class="form-hint" id="dateHint"></div>
+          <div class="form-error" id="dateError"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ghi chú thêm (nếu có)</label>
+          <textarea class="form-textarea" id="custNote" placeholder="Ví dụ: giao giờ hành chính, ít ngọt hơn..."></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="cart-actions">
+      <button class="btn btn-secondary" onclick="toggleCheckout(false)">Quay lại giỏ hàng</button>
+      <button class="btn btn-primary" id="submitOrderBtn" onclick="submitOrder()">Xác nhận đặt hàng</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="overlay" id="successOverlay">
+  <div class="panel">
+    <button class="panel-close" onclick="toggleSuccess(false)">×</button>
+    <h3>🎉 Đặt hàng thành công!</h3>
+    <div class="panel-sub">Chúng mình đã ghi nhận đơn — vui lòng lưu lại thông tin bên dưới</div>
+    <div class="panel-scroll">
+      <div class="confirm-box" id="confirmBox"></div>
+    </div>
+    <div class="cart-actions">
+      <a class="btn btn-secondary" id="zaloBtn" href="https://zalo.me/0888448740" target="_blank" rel="noopener" style="text-decoration:none; text-align:center;">💬 Nhắn Zalo cho shop</a>
+      <button class="btn btn-primary" onclick="toggleSuccess(false)">Đã hiểu</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH OVERLAY (admin) -->
+<div class="overlay" id="authOverlay">
+  <div class="panel">
+    <button class="panel-close" onclick="closeAuthModal()">×</button>
+    <h3>Đăng nhập Admin</h3>
+    <p class="auth-hint">Chỉ chủ quán mới cần đăng nhập để chỉnh sửa trang này. Khách xem web không cần đăng nhập.</p>
+    <div class="panel-scroll">
+      <div class="form-group">
+        <input type="email" id="authEmail" class="form-input" placeholder="Email" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <input type="password" id="authPassword" class="form-input" placeholder="Mật khẩu" autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="doLogin()">Đăng nhập</button>
+      <div class="auth-error" id="authError"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fname">Little Corner</div>
+  <div class="ftag">Bánh Trung Thu handmade — đặt trước, giao đúng hẹn</div>
+  <div class="fcontact">
+    <a class="fcontact-link" href="https://zalo.me/0888448740" target="_blank" rel="noopener">💬 Zalo: 0888448740 (Mr. Tài)</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+/* ============================================================
+   EMAILJS CONFIG — gửi đơn hàng về email khi khách đặt bánh
+   ------------------------------------------------------------
+   1. Tạo tài khoản miễn phí tại https://www.emailjs.com
+   2. Email Services > Add New Service > kết nối Gmail của bạn
+      (taitranvn99@gmail.com) → copy "Service ID" dán vào EMAILJS_SERVICE_ID
+   3. Email Templates > Create New Template. Đặt các biến sau
+      trong nội dung mẫu: {{customer_name}} {{customer_phone}}
+      {{customer_address}} {{delivery_date}} {{order_items}}
+      {{order_total}} {{customer_note}}
+      → copy "Template ID" dán vào EMAILJS_TEMPLATE_ID
+   4. Account > General > copy "Public Key" dán vào EMAILJS_PUBLIC_KEY
+============================================================ */
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+
+let emailjsReady = false;
+try {
+  if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY.indexOf('YOUR_') !== 0) {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    emailjsReady = true;
+  }
+} catch (e) { console.warn('EmailJS not configured yet:', e); }
+
+/* ============================================================
+   SUPABASE CONFIG — dùng chung project với trang thực đơn chính.
+   - Nội dung trang này lưu ở bảng site_content, hàng id: 2
+   - Ảnh tải lên lưu ở Storage bucket "mooncake-images" (xem hướng
+     dẫn tạo bucket ở cuối cuộc trò chuyện)
+============================================================ */
+const SUPABASE_URL = 'https://cofhkbsclfqjgftnqtwx.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNvZmhrYnNjbGZxamdmdG5xdHd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5NDY4MjQsImV4cCI6MjA5OTUyMjgyNH0.8s6eTSqVj4rqBqg-5O1C-K3KbWIm9CU59d3yAL3RNWI';
+const SUPABASE_ROW_ID = 2;
+const SUPABASE_STORAGE_BUCKET = 'mooncake-images';
+
+let supabaseClient = null;
+try {
+  if (typeof supabase !== 'undefined' && SUPABASE_URL.startsWith('http')) {
+    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+} catch (e) { console.warn('Supabase not configured yet:', e); }
+
+/* ---------- DEFAULT CONTENT ---------- */
+const DEFAULT_HERO = {
+  kicker: 'Tết Trung Thu 2025',
+  title: 'Đặt bánh trước, trọn vẹn mùa trăng',
+  desc: 'Chọn vị bánh yêu thích, hẹn ngày nhận bánh — chúng mình sẽ liên hệ xác nhận đơn trong vòng 24 giờ.',
+  note: 'Đặt trước ít nhất 2 ngày để chúng mình chuẩn bị bánh tươi ngon nhất',
+  bgImage: 'images/mooncake-box-lotus.jpg'
+};
+
+const DEFAULT_PRODUCTS = [
+  { id:'p1', name:'Lá dứa dừa non trứng muối', badge:'', desc:'Vỏ bánh lá dứa thơm nhẹ, nhân dừa non béo mềm cùng trứng muối.', weight:'180g/bánh', price:80000, img:'images/mooncake-cross-section.jpg', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất' },
+  { id:'p2', name:'Hạt sen nhãn nhục trứng muối', badge:'', desc:'Nhân hạt sen tán nhuyễn hoà cùng nhãn nhục ngọt thanh, trứng muối béo bùi.', weight:'180g/bánh', price:80000, img:'images/mooncake-box-open.jpg', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất' },
+  { id:'p3', name:'Khoai môn mochi & chà bông trứng muối', badge:'Vị đặc biệt', desc:'Khoai môn tím dẻo mochi, điểm thêm chà bông mặn ngọt và trứng muối.', weight:'180g/bánh', price:80000, img:'images/mooncake-cross-section.jpg', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất' },
+  { id:'p4', name:'Canh chua tôm', badge:'Vị lạ miệng', desc:'Nhân mặn phong cách canh chua tôm, hạt điều và ngũ cốc giòn tan.', weight:'180g/bánh', price:80000, img:'images/mooncake-box-lotus.jpg', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất' },
+  { id:'p5', name:'Khóm dứa trứng muối', badge:'', desc:'Mứt khóm dứa chua ngọt hài hoà cùng trứng muối béo ngậy.', weight:'180g/bánh', price:80000, img:'images/mooncake-cross-section.jpg', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất' },
+  { id:'p6', name:'Vua trứng muối', badge:'Bán chạy', desc:'Phần nhân đậm đà nhất, nhiều trứng muối cho người mê vị mặn béo.', weight:'180g/bánh', price:80000, img:'images/mooncake-box-open.jpg', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất' },
+  { id:'set2', name:'Set 2 — Tự chọn vị', badge:'Set quà tặng', desc:'Được chọn từng vị theo ý, free ship 10%, tặng 1 vỏ hộp Trung Thu 2 bánh.', weight:'Hộp 2 bánh', price:160000, img:'images/mooncake-box-lotus.jpg', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất' },
+  { id:'set4', name:'Set 4 — Tự chọn vị', badge:'Ưu đãi nhất', desc:'Được chọn từng vị theo ý, free ship 30%, tặng 1 vỏ hộp Trung Thu 4 bánh.', weight:'Hộp 4 bánh', price:300000, img:'images/mooncake-box-open.jpg', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất' },
+];
+
+const DEFAULT_SHOWCASE = {
+  img1: 'images/mooncake-cross-section.jpg',
+  img2: 'images/mooncake-box-open.jpg'
+};
+
+let CONTENT = {
+  hero: JSON.parse(JSON.stringify(DEFAULT_HERO)),
+  products: JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)),
+  showcase: JSON.parse(JSON.stringify(DEFAULT_SHOWCASE))
+};
+
+const cart = {};
+let pendingQty = {};
+let editMode = false;
+
+function fmt(n){ return n.toLocaleString('vi-VN') + 'đ'; }
+
+function el(tag, cls, html){
+  const e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+/* ---------- IMAGE UPLOAD HELPERS ---------- */
+async function uploadImageAndApply(file, onSuccess){
+  if(!file) return;
+  if(!supabaseClient){
+    alert('Chưa cấu hình Supabase Storage nên chưa thể tải ảnh lên. Xem hướng dẫn thiết lập bucket "mooncake-images".');
+    return;
+  }
+  showToast('⏳ Đang tải ảnh lên...');
+  try{
+    const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+    const filename = `img_${Date.now()}_${Math.random().toString(36).slice(2,8)}.${ext}`;
+    const { error: upErr } = await supabaseClient.storage
+      .from(SUPABASE_STORAGE_BUCKET)
+      .upload(filename, file, { upsert:true, cacheControl:'3600' });
+    if(upErr){
+      alert('Tải ảnh thất bại: ' + upErr.message + '\n\nKiểm tra lại: bucket "mooncake-images" đã tạo và bật public chưa, và policy cho phép người đăng nhập upload chưa.');
+      return;
+    }
+    const { data:urlData } = supabaseClient.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(filename);
+    onSuccess(urlData.publicUrl);
+    showToast('✅ Đã cập nhật ảnh — nhớ bấm "Lưu" để lưu lại vĩnh viễn');
+  } catch(e){
+    console.error(e);
+    alert('Có lỗi khi tải ảnh lên: ' + e.message);
+  }
+}
+
+function handleHeroImageChange(event){
+  const file = event.target.files[0];
+  uploadImageAndApply(file, (url) => {
+    CONTENT.hero.bgImage = url;
+    applyHeroBackground();
+  });
+  event.target.value = '';
+}
+function removeHeroImage(){
+  if(!confirm('Xoá ảnh nền hiện tại?')) return;
+  CONTENT.hero.bgImage = '';
+  applyHeroBackground();
+}
+function applyHeroBackground(){
+  const hero = document.getElementById('heroSection');
+  if(CONTENT.hero.bgImage){
+    hero.style.backgroundImage = `url('${CONTENT.hero.bgImage}')`;
+  } else {
+    hero.style.backgroundImage = 'none';
+  }
+}
+
+function renderImageEditWrap(containerId, currentUrl, altText, onChangeUrl){
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = '';
+  if(currentUrl){
+    const img = el('img');
+    img.src = currentUrl;
+    img.alt = altText;
+    wrap.appendChild(img);
+  } else {
+    const ph = el('div','img-placeholder','<span class="icon">🖼️</span><span>Chưa có ảnh</span>');
+    wrap.appendChild(ph);
+  }
+  const overlay = el('div','img-edit-overlay');
+  const changeLabel = el('label','img-edit-btn', currentUrl ? '📤 Đổi ảnh' : '📤 Thêm ảnh');
+  const fileInput = el('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/*';
+  fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    uploadImageAndApply(file, onChangeUrl);
+    e.target.value = '';
+  };
+  changeLabel.appendChild(fileInput);
+  overlay.appendChild(changeLabel);
+  if(currentUrl){
+    const delBtn = el('button','img-edit-btn danger','🗑 Xoá ảnh');
+    delBtn.onclick = () => {
+      if(!confirm('Xoá ảnh này?')) return;
+      onChangeUrl('');
+    };
+    overlay.appendChild(delBtn);
+  }
+  wrap.appendChild(overlay);
+}
+
+function renderShowcaseImages(){
+  renderImageEditWrap('showcase1ImgWrap', CONTENT.showcase.img1, 'Lát cắt bánh trung thu Little Corner', (url) => {
+    CONTENT.showcase.img1 = url;
+    renderShowcaseImages();
+  });
+  renderImageEditWrap('showcase2ImgWrap', CONTENT.showcase.img2, 'Hộp quà Trung Thu Little Corner', (url) => {
+    CONTENT.showcase.img2 = url;
+    renderShowcaseImages();
+  });
+}
+
+/* ---------- RENDER PRODUCTS ---------- */
+function renderProducts(){
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+  CONTENT.products.forEach((p, idx) => {
+    pendingQty[p.id] = pendingQty[p.id] || 1;
+    const card = el('div','card');
+
+    const delBtn = el('button','card-del','×');
+    delBtn.onclick = () => {
+      if(!confirm('Xoá món "' + p.name + '"?')) return;
+      CONTENT.products.splice(idx, 1);
+      renderProducts();
+    };
+    card.appendChild(delBtn);
+
+    const badge = el('div','card-badge', p.badge || '');
+    if(editMode){
+      badge.contentEditable = 'true';
+      badge.addEventListener('blur', () => { p.badge = badge.textContent.trim(); });
+    } else if(!p.badge){
+      badge.style.display = 'none';
+    }
+    card.appendChild(badge);
+
+    const imgWrap = el('div','card-img img-edit-wrap');
+    if(p.img){
+      imgWrap.style.backgroundImage = `url('${p.img}')`;
+    } else {
+      const ph = el('div','img-placeholder','<span class="icon">🖼️</span><span>Chưa có ảnh</span>');
+      ph.style.position='absolute'; ph.style.inset='0';
+      imgWrap.appendChild(ph);
+    }
+    const imgOverlay = el('div','img-edit-overlay');
+    const changeLabel = el('label','img-edit-btn', p.img ? '📤 Đổi ảnh' : '📤 Thêm ảnh');
+    const fileInput = el('input');
+    fileInput.type='file'; fileInput.accept='image/*';
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      uploadImageAndApply(file, (url) => { p.img = url; renderProducts(); });
+      e.target.value = '';
+    };
+    changeLabel.appendChild(fileInput);
+    imgOverlay.appendChild(changeLabel);
+    if(p.img){
+      const delImgBtn = el('button','img-edit-btn danger','🗑 Xoá ảnh');
+      delImgBtn.onclick = (ev) => {
+        ev.stopPropagation();
+        if(!confirm('Xoá ảnh món này?')) return;
+        p.img = '';
+        renderProducts();
+      };
+      imgOverlay.appendChild(delImgBtn);
+    }
+    imgWrap.appendChild(imgOverlay);
+    card.appendChild(imgWrap);
+
+    const body = el('div','card-body');
+    const nameEl = el('div','card-name', p.name);
+    const descEl = el('div','card-desc', p.desc);
+
+    const metaBlock = el('div','card-meta-block');
+    const weightRow = el('div','card-meta');
+    weightRow.appendChild(el('b','', 'Khối lượng: '));
+    const weightVal = el('span','', p.weight);
+    weightRow.appendChild(weightVal);
+    metaBlock.appendChild(weightRow);
+
+    const preservRow = el('div','card-meta');
+    preservRow.appendChild(el('b','', 'Bảo quản: '));
+    const preservVal = el('span','', p.preservation || 'Nhiệt độ thường');
+    preservRow.appendChild(preservVal);
+    metaBlock.appendChild(preservRow);
+
+    const shelfRow = el('div','card-meta');
+    shelfRow.appendChild(el('b','', 'Hạn sử dụng: '));
+    const shelfVal = el('span','', p.shelfLife || '6 ngày kể từ ngày sản xuất');
+    shelfRow.appendChild(shelfVal);
+    metaBlock.appendChild(shelfRow);
+
+    if(editMode){
+      nameEl.contentEditable = 'true';
+      nameEl.addEventListener('blur', () => { p.name = nameEl.textContent.trim(); });
+      descEl.contentEditable = 'true';
+      descEl.addEventListener('blur', () => { p.desc = descEl.textContent.trim(); });
+      weightVal.contentEditable = 'true';
+      weightVal.addEventListener('blur', () => { p.weight = weightVal.textContent.trim(); });
+      preservVal.contentEditable = 'true';
+      preservVal.addEventListener('blur', () => { p.preservation = preservVal.textContent.trim(); });
+      shelfVal.contentEditable = 'true';
+      shelfVal.addEventListener('blur', () => { p.shelfLife = shelfVal.textContent.trim(); });
+    }
+
+    body.appendChild(nameEl);
+    body.appendChild(descEl);
+    body.appendChild(metaBlock);
+
+    const priceRow = el('div','price-row');
+    const priceEl = el('div','price', fmt(p.price));
+    if(editMode){
+      priceEl.contentEditable = 'true';
+      priceEl.addEventListener('blur', () => {
+        const digits = priceEl.textContent.replace(/[^0-9]/g,'');
+        p.price = parseInt(digits || '0', 10);
+        priceEl.textContent = fmt(p.price);
+      });
+    }
+    priceRow.appendChild(priceEl);
+
+    const rightWrap = el('div','','');
+    rightWrap.style.display = 'flex';
+    rightWrap.style.flexDirection = 'column';
+    rightWrap.style.alignItems = 'flex-end';
+    rightWrap.style.gap = '8px';
+
+    if(!editMode){
+      const stepper = el('div','qty-stepper');
+      const minusBtn = el('button','qty-btn','−');
+      const qtyVal = el('span','qty-val', String(pendingQty[p.id]));
+      const plusBtn = el('button','qty-btn','+');
+      minusBtn.onclick = () => { if(pendingQty[p.id] > 1){ pendingQty[p.id]--; qtyVal.textContent = pendingQty[p.id]; } };
+      plusBtn.onclick = () => { pendingQty[p.id]++; qtyVal.textContent = pendingQty[p.id]; };
+      stepper.appendChild(minusBtn); stepper.appendChild(qtyVal); stepper.appendChild(plusBtn);
+
+      const addBtn = el('button','add-btn','Thêm vào giỏ');
+      addBtn.onclick = () => {
+        const qty = pendingQty[p.id];
+        if(cart[p.id]) cart[p.id].qty += qty;
+        else cart[p.id] = { name:p.name, price:p.price, qty:qty };
+        pendingQty[p.id] = 1;
+        qtyVal.textContent = '1';
+        renderCart();
+        addBtn.textContent = 'Đã thêm ✓';
+        setTimeout(() => addBtn.textContent = 'Thêm vào giỏ', 900);
+      };
+
+      rightWrap.appendChild(stepper);
+      rightWrap.appendChild(addBtn);
+    } else {
+      rightWrap.appendChild(el('div','', '<span style="font-size:11px;color:var(--ink-soft)">Đang chỉnh sửa</span>'));
+    }
+
+    priceRow.appendChild(rightWrap);
+    body.appendChild(priceRow);
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+
+  if(editMode){
+    const addCard = el('div','add-product-card');
+    addCard.innerHTML = '<span class="add-product-plus">+</span><span>Thêm món mới</span>';
+    addCard.onclick = () => {
+      CONTENT.products.push({
+        id: 'p' + Date.now(),
+        name:'Món mới', badge:'', desc:'Mô tả món bánh...', weight:'180g/bánh', price:80000,
+        img:'', preservation:'Nhiệt độ thường', shelfLife:'6 ngày kể từ ngày sản xuất'
+      });
+      renderProducts();
+    };
+    grid.appendChild(addCard);
+  }
+}
+
+/* ---------- HERO EDITABLE BINDING ---------- */
+function bindHeroFields(){
+  const kicker = document.getElementById('heroKicker');
+  const title = document.getElementById('heroTitle');
+  const desc = document.getElementById('heroDesc');
+  const note = document.getElementById('heroNote');
+  kicker.textContent = CONTENT.hero.kicker;
+  title.textContent = CONTENT.hero.title;
+  desc.textContent = CONTENT.hero.desc;
+  note.textContent = CONTENT.hero.note;
+  kicker.addEventListener('blur', () => { CONTENT.hero.kicker = kicker.textContent.trim(); });
+  title.addEventListener('blur', () => { CONTENT.hero.title = title.textContent.trim(); });
+  desc.addEventListener('blur', () => { CONTENT.hero.desc = desc.textContent.trim(); });
+  note.addEventListener('blur', () => { CONTENT.hero.note = note.textContent.trim(); });
+  applyHeroBackground();
+}
+
+function setEditableState(){
+  ['heroKicker','heroTitle','heroDesc','heroNote'].forEach(id => {
+    document.getElementById(id).contentEditable = editMode ? 'true' : 'false';
+  });
+}
+
+/* ---------- CART ---------- */
+function renderCart(){
+  const items = Object.entries(cart);
+  const countEl = document.getElementById('cartCount');
+  const itemsEl = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+
+  const totalQty = items.reduce((s,[,i])=>s+i.qty,0);
+  countEl.textContent = totalQty;
+
+  itemsEl.innerHTML = '';
+  if(items.length === 0){
+    itemsEl.appendChild(el('div','cart-empty','Giỏ hàng đang trống. Hãy chọn vài chiếc bánh yêu thích nhé 🌕'));
+  } else {
+    items.forEach(([id, it]) => {
+      const row = el('div','cart-item');
+      const nameDiv = el('div','cart-item-name', '<b>'+it.qty+'x</b> ' + it.name);
+      const right = el('div','','');
+      right.style.display='flex'; right.style.alignItems='center'; right.style.gap='10px';
+      right.appendChild(el('span','', fmt(it.price*it.qty)));
+      const rm = el('button','cart-item-remove','Xoá');
+      rm.onclick = () => { delete cart[id]; renderCart(); };
+      right.appendChild(rm);
+      row.appendChild(nameDiv); row.appendChild(right);
+      itemsEl.appendChild(row);
+    });
+  }
+  const total = items.reduce((s,[,i])=>s+i.price*i.qty,0);
+  totalEl.textContent = fmt(total);
+
+  document.getElementById('goCheckoutBtn').disabled = items.length === 0;
+}
+
+function toggleCart(open){
+  document.getElementById('cartOverlay').classList.toggle('open', open);
+}
+
+/* ---------- CHECKOUT ---------- */
+function minOrderDate(){
+  const d = new Date();
+  d.setDate(d.getDate() + 2);
+  return d;
+}
+function dateToInputValue(d){
+  return d.toISOString().split('T')[0];
+}
+
+function setupDateField(){
+  const dateInput = document.getElementById('custDate');
+  const min = minOrderDate();
+  const minStr = dateToInputValue(min);
+  dateInput.min = minStr;
+  dateInput.value = minStr;
+  document.getElementById('dateHint').textContent =
+    'Nhận bánh sớm nhất vào ngày ' + min.toLocaleDateString('vi-VN') + ' (sau 2 ngày kể từ hôm nay)';
+}
+
+function toggleCheckout(open){
+  document.getElementById('checkoutOverlay').classList.toggle('open', open);
+  if(open){
+    toggleCart(false);
+    setupDateField();
+  }
+}
+
+function openCheckout(){
+  if(Object.keys(cart).length === 0) return;
+  toggleCheckout(true);
+}
+
+function validatePhone(phone){
+  return /^(0|\+84)[0-9]{8,10}$/.test(phone.replace(/[\s.-]/g,''));
+}
+
+function submitOrder(){
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const address = document.getElementById('custAddress').value.trim();
+  const dateVal = document.getElementById('custDate').value;
+  const note = document.getElementById('custNote').value.trim();
+
+  const phoneError = document.getElementById('phoneError');
+  const dateError = document.getElementById('dateError');
+  phoneError.textContent = '';
+  dateError.textContent = '';
+
+  let valid = true;
+
+  if(!name || !phone || !address || !dateVal){
+    valid = false;
+    if(!phone) phoneError.textContent = 'Vui lòng nhập đầy đủ thông tin bắt buộc (*)';
+  }
+  if(phone && !validatePhone(phone)){
+    phoneError.textContent = 'Số điện thoại chưa hợp lệ';
+    valid = false;
+  }
+
+  const chosenDate = new Date(dateVal + 'T00:00:00');
+  const min = minOrderDate();
+  min.setHours(0,0,0,0);
+  if(chosenDate < min){
+    dateError.textContent = 'Ngày nhận bánh phải từ ' + min.toLocaleDateString('vi-VN') + ' trở đi (ít nhất 2 ngày sau khi đặt)';
+    valid = false;
+  }
+
+  if(!valid) return;
+
+  const items = Object.values(cart);
+  const total = items.reduce((s,i)=>s+i.price*i.qty,0);
+  const itemsText = items.map(it => it.qty+'x '+it.name+' = '+fmt(it.price*it.qty)).join('\n');
+  const dateStr = chosenDate.toLocaleDateString('vi-VN');
+
+  const submitBtn = document.getElementById('submitOrderBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Đang gửi...';
+
+  const finishOrder = () => {
+    document.getElementById('confirmBox').innerHTML =
+      '<b>Bánh đã đặt:</b><br>' + items.map(it => it.qty+'x '+it.name).join('<br>') +
+      '<br><br><b>Tổng cộng:</b> ' + fmt(total) +
+      '<br><br><b>Người nhận:</b> ' + name +
+      '<br><b>Điện thoại:</b> ' + phone +
+      '<br><b>Địa chỉ:</b> ' + address +
+      '<br><b>Ngày nhận:</b> ' + dateStr +
+      (note ? '<br><b>Ghi chú:</b> ' + note : '');
+
+    Object.keys(cart).forEach(k => delete cart[k]);
+    renderCart();
+    toggleCheckout(false);
+    toggleSuccess(true);
+    document.getElementById('orderForm').reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Xác nhận đặt hàng';
+  };
+
+  if(emailjsReady){
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      customer_name: name,
+      customer_phone: phone,
+      customer_address: address,
+      delivery_date: dateStr,
+      order_items: itemsText,
+      order_total: fmt(total),
+      customer_note: note || '(không có)'
+    }).then(finishOrder).catch((err) => {
+      console.error('EmailJS error:', err);
+      alert('Không gửi được email tự động, nhưng đơn của bạn đã được ghi nhận. Vui lòng nhắn Zalo cho shop để chắc chắn nhé!');
+      finishOrder();
+    });
+  } else {
+    finishOrder();
+  }
+}
+
+function toggleSuccess(open){
+  document.getElementById('successOverlay').classList.toggle('open', open);
+}
+
+/* ---------- SUPABASE ADMIN AUTH + CONTENT SYNC ---------- */
+function openAuthModal(){
+  document.getElementById('authError').textContent = '';
+  document.getElementById('authOverlay').classList.add('open');
+}
+function closeAuthModal(){
+  document.getElementById('authOverlay').classList.remove('open');
+}
+
+async function doLogin(){
+  const errorEl = document.getElementById('authError');
+  if(!supabaseClient){
+    errorEl.textContent = 'Chưa cấu hình Supabase trong file này.';
+    return;
+  }
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  if(!email || !password){ errorEl.textContent = 'Vui lòng nhập email và mật khẩu.'; return; }
+  errorEl.textContent = 'Đang đăng nhập...';
+  const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+  if(error){
+    errorEl.textContent = 'Sai email hoặc mật khẩu.';
+    return;
+  }
+  closeAuthModal();
+  document.getElementById('authEmail').value = '';
+  document.getElementById('authPassword').value = '';
+  setEditMode(true);
+}
+
+async function handleAdminClick(){
+  if(editMode){
+    await saveContent(true);
+    if(supabaseClient) await supabaseClient.auth.signOut();
+    setEditMode(false);
+    return;
+  }
+  if(!supabaseClient){
+    alert('Chưa cấu hình Supabase trong file này.');
+    return;
+  }
+  const { data:{ session } } = await supabaseClient.auth.getSession();
+  if(session){
+    setEditMode(true);
+  } else {
+    openAuthModal();
+  }
+}
+
+function setEditMode(value){
+  editMode = value;
+  document.body.classList.toggle('edit-mode', editMode);
+  document.getElementById('adminToggle').classList.toggle('active', editMode);
+  document.getElementById('adminToggle').title = editMode ? 'Đăng xuất (đang ở chế độ chỉnh sửa)' : 'Chế độ chỉnh sửa (Admin)';
+  setEditableState();
+  renderProducts();
+  renderShowcaseImages();
+}
+
+let saveInFlight = false;
+async function saveContent(showFeedback){
+  if(!supabaseClient){
+    if(showFeedback) alert('Chưa cấu hình Supabase — không thể lưu.');
+    return;
+  }
+  if(saveInFlight) return;
+  saveInFlight = true;
+  const btn = document.getElementById('saveBtn');
+  if(btn) btn.textContent = '⏳ Đang lưu...';
+  const { error } = await supabaseClient
+    .from('site_content')
+    .upsert({ id: SUPABASE_ROW_ID, payload: CONTENT, updated_at: new Date().toISOString() });
+  saveInFlight = false;
+  if(btn) btn.innerHTML = '💾 Lưu';
+  if(error){
+    console.error('Save error:', error);
+    if(showFeedback) alert('Lưu thất bại: ' + error.message);
+  } else {
+    if(showFeedback) showToast('✅ Đã lưu thay đổi lên máy chủ');
+  }
+}
+
+async function loadContent(){
+  if(!supabaseClient) return;
+  try{
+    const { data, error } = await supabaseClient
+      .from('site_content')
+      .select('payload')
+      .eq('id', SUPABASE_ROW_ID)
+      .maybeSingle();
+    if(!error && data && data.payload){
+      CONTENT = data.payload;
+      if(!CONTENT.showcase) CONTENT.showcase = JSON.parse(JSON.stringify(DEFAULT_SHOWCASE));
+      CONTENT.products.forEach(p => {
+        if(p.preservation === undefined) p.preservation = 'Nhiệt độ thường';
+        if(p.shelfLife === undefined) p.shelfLife = '6 ngày kể từ ngày sản xuất';
+      });
+    }
+  } catch(e){
+    console.warn('Could not load saved content, using defaults:', e);
+  }
+}
+
+function exportSite(){
+  const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([htmlContent], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'trungthu_da_chinh.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+let toastTimer = null;
+function showToast(message){
+  let toast = document.getElementById('toast');
+  if(!toast){
+    toast = el('div','toast');
+    toast.id = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+/* ---------- INIT ---------- */
+async function initSite(){
+  await loadContent();
+  bindHeroFields();
+  renderProducts();
+  renderCart();
+  renderShowcaseImages();
+
+  if(supabaseClient){
+    const { data:{ session } } = await supabaseClient.auth.getSession();
+    if(session){
+      document.getElementById('adminToggle').classList.add('logged-in');
+      document.getElementById('adminToggle').title = 'Đã đăng nhập — bấm để bật chế độ chỉnh sửa';
+    }
+  }
+}
+
+initSite();
+</script>
+</body>
+</html>
